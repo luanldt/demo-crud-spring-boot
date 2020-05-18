@@ -48,6 +48,12 @@ public class MovieServiceImpl implements MovieService {
         dto.getTags().add(tagDto);
       });
 
+      dto.setBackgrounds(new LinkedList<>());
+      entity.getBackgrounds().forEach(background -> {
+        dto.getBackgrounds().add(background.getUrl());
+      });
+
+
       return dto;
     }).collect(Collectors.toList());
   }

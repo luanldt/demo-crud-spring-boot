@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
-  @EntityGraph(attributePaths = {"categories", "tags"})
+  @EntityGraph(attributePaths = {"categories", "tags", "backgrounds"})
   @Query("SELECT m FROM Movie m")
   List<Movie> findAllFetchChild();
 
