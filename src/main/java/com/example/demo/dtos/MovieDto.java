@@ -33,4 +33,6 @@ public class MovieDto {
   private List<CategoryDto> categories;
 
   private List<TagDto> tags;
+
+  private List<String> backgrounds;
 }
