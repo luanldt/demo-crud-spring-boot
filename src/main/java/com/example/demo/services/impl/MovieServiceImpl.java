@@ -10,10 +10,11 @@ import com.example.demo.services.MovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,10 +28,10 @@ public class MovieServiceImpl implements MovieService {
 
   @Override
   @Transactional(readOnly = true)
-  public List<MovieDto> findAll() {
-    List<Movie> entities = movieRepository.findAllFetchChild();
+  public List<MovieDto> findAll(Pageable pageable) {
+    Page<Movie> entities = movieRepository.findAllFetchChild(pageable);
 
-    return entities.parallelStream().map(entity -> {
+    return entities.map(entity -> {
       MovieDto dto = new MovieDto();
       BeanUtils.copyProperties(entity, dto);
       dto.setCategories(new LinkedList<>());
@@ -55,7 +56,7 @@ public class MovieServiceImpl implements MovieService {
 
 
       return dto;
-    }).collect(Collectors.toList());
+    }).getContent();
   }
 
   @Override

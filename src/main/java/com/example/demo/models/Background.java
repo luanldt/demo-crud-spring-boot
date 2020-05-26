@@ -1,12 +1,14 @@
 package com.example.demo.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Data
 @Entity
+@EqualsAndHashCode(of = "id")
 public class Background {
 
     @Id

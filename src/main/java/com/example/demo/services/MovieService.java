@@ -2,11 +2,12 @@ package com.example.demo.services;
 
 import com.example.demo.dtos.MovieDto;
 import com.example.demo.exceptions.ResourceNotFoundException;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface MovieService {
-  List<MovieDto> findAll();
+  List<MovieDto> findAll(Pageable pageable);
 
   MovieDto findById(int id) throws ResourceNotFoundException;
 

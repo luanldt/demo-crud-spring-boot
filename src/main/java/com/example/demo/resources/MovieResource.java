@@ -4,6 +4,7 @@ import com.example.demo.dtos.MovieDto;
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.services.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,8 +18,8 @@ public class MovieResource {
   private final MovieService movieService;
 
   @GetMapping("")
-  public List<MovieDto> findAll() {
-    return movieService.findAll();
+  public List<MovieDto> findAll(Pageable pageable) {
+    return movieService.findAll(pageable);
   }
 
   @GetMapping("/{id}")
